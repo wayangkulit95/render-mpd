@@ -1,0 +1,151 @@
+MTS Official Channel Management System
+
+This project provides a Channel Management System built with Node.js and Express, designed for managing channels, streaming content, and secure management of your server with SSL. The app allows you to add, edit, delete channels, and manage streaming content. Additionally, it automates SSL certificate configuration and uses Nginx as a reverse proxy for efficient traffic handling.
+Features
+
+    Secure login system: Provides login functionality for administrators.
+    Channel management: Allows adding, editing, and deleting channels.
+    Channel data storage: Uses a JSON file to store channel data persistently.
+    SSL Setup: Automatically configures SSL using Let’s Encrypt.
+    Nginx reverse proxy: Uses Nginx to route traffic and improve security and performance.
+    User-friendly web interface: For managing channels and viewing content.
+
+Requirements
+
+    Node.js (v14 or higher)
+    Nginx installed on the VPS
+    Certbot (for SSL setup)
+    A VPS with a domain name pointing to its IP address.
+
+Installation & Setup
+Step 1: Clone the Repository
+
+Clone the repository to your server:
+
+git clone https://your-repository-url.git
+cd mtsofficial-dashboard
+
+Step 2: Run the setup.sh Script
+
+Run the provided setup.sh script. This script will:
+
+    Install necessary dependencies.
+    Set up Nginx as a reverse proxy.
+    Install Certbot for SSL certificate configuration.
+    Set up the Node.js application.
+
+chmod +x setup.sh
+./setup.sh
+
+During the setup, you will be prompted to enter your domain name. Ensure your domain is pointed to the server's IP address before running the script.
+Step 3: Run the Application
+
+Once the setup is complete, start the application using Node.js:
+
+node app.js
+
+Your application should now be accessible at:
+
+    http://localhost:8881 (or)
+    https://yourdomain.com (after SSL configuration).
+
+Step 4: Access the Channel Management Dashboard
+
+To access the channel management dashboard, open your browser and visit:
+
+    https://yourdomain.com/dashboard
+
+Step 5: Add/Edit/Delete Channels
+
+From the dashboard, you can manage channels:
+
+    Add a new channel: Use the "Add Channel" button to create new channels.
+    Edit an existing channel: Click the "Edit" button to modify the channel’s details.
+    Delete a channel: Click the "Delete" button to remove a channel.
+
+Step 6: SSL Setup and Renewal
+
+The setup.sh script automatically configures Let’s Encrypt SSL. It sets up a cron job that will automatically renew the SSL certificates every 12 hours, ensuring your site remains secure.
+Step 7: Channel Streaming
+
+Once you have added a channel, you can stream content via the following route:
+
+    http://localhost:8881/stream/sports
+    http://localhost:8881/stream/sports.mpd
+
+You can specify the channel's content and stream URL during the channel configuration.
+Troubleshooting
+Common Errors
+
+    Nginx Issues: If Nginx is not working, ensure your domain is pointed to the server's IP address. Verify the Nginx configuration by checking the /etc/nginx/sites-available and /etc/nginx/sites-enabled directories.
+
+    SSL Certificate Issues: If SSL isn't working, ensure that your domain is correctly pointed to your server and that Certbot was able to create a valid SSL certificate. If needed, run Certbot manually:
+
+    sudo certbot --nginx -d yourdomain.com
+
+    Node.js Crashes: If Node.js crashes, check for errors in the terminal where the application is running. Common issues might include missing dependencies or syntax issues.
+
+Logs
+
+    Node.js logs: Can be viewed in the terminal where node app.js is running.
+    Nginx logs: Found in /var/log/nginx/ for debugging reverse proxy or SSL issues.
+    SSL Errors: Certbot logs are located in /var/log/letsencrypt/.
+
+Deployment Instructions (Optional)
+Step 1: Set Up a VPS
+
+Ensure your server is configured with Ubuntu (or another compatible OS). Also, ensure your domain name is pointed to your VPS's IP address.
+Step 2: Install Dependencies
+
+If Node.js or Nginx is not installed, install them manually:
+
+sudo apt update
+sudo apt install nodejs npm nginx
+
+Step 3: Configure Nginx as Reverse Proxy
+
+Configure Nginx to forward traffic to the application. Modify the Nginx config file at /etc/nginx/sites-available/default:
+
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    location / {
+        proxy_pass http://localhost:8881;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Redirect HTTP to HTTPS
+    server {
+        listen 443 ssl;
+        server_name yourdomain.com;
+
+        ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+
+        location / {
+            proxy_pass http://localhost:8881;
+        }
+    }
+}
+
+Step 4: Install Certbot for SSL
+
+Run Certbot to configure SSL for your domain:
+
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d yourdomain.com
+
+Certbot will configure SSL and automatically update Nginx.
+Step 5: Restart Nginx
+
+After configuring everything, restart Nginx to apply the changes:
+
+sudo systemctl restart nginx
+
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
