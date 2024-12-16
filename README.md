@@ -16,12 +16,27 @@ Before starting, ensure you have the following installed on your system:
 
 1. SSH into your server and run the following command to download and execute the setup script:
     ```bash
+sudo apt update
+    ```
+    ```bash
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt install -y nodejs
+    ```
+    ```bash
+node -v
+    ```
+    ```bash
+cd /root/mtsofficial-dashboard
+npm install
+```
+
+   ```bash
     wget https://raw.githubusercontent.com/wayangkulit95/render-mpd/refs/heads/main/setup1.sh
     chmod +x setup1.sh
     ./setup1.sh
     ```
 
-2. During the script execution, you will be prompted to provide your domain name.
+3. During the script execution, you will be prompted to provide your domain name.
 
 ### 2. What the Script Does
 
