@@ -16,9 +16,9 @@ Before starting, ensure you have the following installed on your system:
 
 1. SSH into your server and run the following command to download and execute the setup script:
     ```bash
-    wget https://raw.githubusercontent.com/wayangkulit95/render-mpd/refs/heads/main/setup.sh
+    wget https://raw.githubusercontent.com/wayangkulit95/render-mpd/refs/heads/main/setup1.sh
     chmod +x setup1.sh
-    ./setup.sh
+    ./setup1.sh
     ```
 
 2. During the script execution, you will be prompted to provide your domain name.
