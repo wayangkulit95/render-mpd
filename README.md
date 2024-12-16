@@ -74,7 +74,7 @@ Once the setup is complete:
     ```
 ### 6. Install the Script
 ```bash
- bash <(curl -s [https://raw.githubusercontent.com/wayangkulit95/(https://raw.githubusercontent.com/wayangkulit95/render-mpd/refs/heads/main/setup1.sh)
+ bash <(curl -s (https://raw.githubusercontent.com/wayangkulit95/render-mpd/refs/heads/main/setup.sh)
 ```
 
 ## License
