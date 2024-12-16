@@ -73,8 +73,9 @@ Once the setup is complete:
     sudo tail -f /var/log/letsencrypt/letsencrypt.log
     ```
 ### 6. Install the Script
-   bash <(curl -s https://raw.githubusercontent.com/wayangkulit95/usermanager/main/install.sh)
-
+```bash
+ <(curl -s https://raw.githubusercontent.com/wayangkulit95/usermanager/main/install.sh)
+```
 
 ## License
 
