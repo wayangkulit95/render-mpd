@@ -18,13 +18,25 @@ Before starting, ensure you have the following installed on your system:
     ```bash
 sudo apt update
     ```
+
+
+
+    
     ```bash
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt install -y nodejs
     ```
+
+
+
+    
     ```bash
 node -v
     ```
+
+
+
+    
     ```bash
 cd /root/mtsofficial-dashboard
 npm install
