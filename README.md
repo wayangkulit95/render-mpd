@@ -74,7 +74,7 @@ Once the setup is complete:
     ```
 ### 6. Install the Script
     ```bash
-bash <(curl -s https://raw.githubusercontent.com/wayangkulit95/usermanager/main/install.sh)
+    <(curl -s https://raw.githubusercontent.com/wayangkulit95/usermanager/main/install.sh)
     ```
 
 ## License
